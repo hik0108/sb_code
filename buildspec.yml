@@ -18,7 +18,7 @@ phases:
 artifacts: 
   files: # 빌드후에 배포단계로 옮길 파일들.
     - target/springbootApp.jar
-    - scripts/start.sh
-    - scripts/stop.sh
+    - start.sh
+    - stop.sh
     - appspec.yml
   discard-paths: yes # 파일의 목적지 상에 경로를 무시하겠다. 
