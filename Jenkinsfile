@@ -40,7 +40,7 @@ pipeline {
         }
         stage('image build') {
             steps {
-                sh "docker build -t hinkyung/spring:1.0 ."
+                sh "docker build -t ${DOCKERHUB}:1.0 ."
             }
         }
     }
