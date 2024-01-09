@@ -35,9 +35,9 @@ pipeline {
                 sh "mvn clean package"
             }
         }
-        stage('Deploy') {
+        stage('image build') {
             steps {
-                echo 'Deploying....'
+                sh "docker vuild -t hinkyung/spring:1.0 ."
             }
         }
     }
