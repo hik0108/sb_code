@@ -17,8 +17,7 @@ pipeline {
                 checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [],
                 userRemoteConfigs: [[credentialsId: GITCREDENTIAL, url: GITWEBADD]]])
             }
-
-        }
+            
         post {
         
             failure {
@@ -28,11 +27,12 @@ pipeline {
                 echo 'Repository clone success'
             }
         }
+    }
 
         
-        stage('Test') {
+        stage('code build') {
             steps {
-                echo 'Testing..'
+                sh "mvn clean package"
             }
         }
         stage('Deploy') {
