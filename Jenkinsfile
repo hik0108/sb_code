@@ -40,8 +40,31 @@ pipeline {
         }
         stage('image build') {
             steps {
-                sh "docker build -t ${DOCKERHUB}:1.0 ."
+                sh "docker build -t ${DOCKERHUB}:${currentBuild.number} ."
+                sh "docker build -t  ${DOCKERHUB}:latest ."
+                // currentBuild.number : 젠킨스 build number
             }
         }
+        stage('image push') {
+            steps {
+                sh "docker  push ${DOCKERHUB}:${currentBuild.number}"
+                sh "docker  push ${DOCKERHUB}:latest"
+                // currentBuild.number : 젠킨스 build number
+            }
+            
+            post {
+                failure {
+                    echo 'docker image push failure'
+                    sh "docker image rm -f ${DOCKERHUB}:${currentBuild.number}"
+                    sh "docker image rm -f ${DOCKERHUB}:latest"
+                }
+                
+                success{
+                    echo 'docker image push success'
+                    sh "docker image rm -f ${DOCKERHUB}:${currentBuild.number}"
+                    sh "docker image rm -f ${DOCKERHUB}:latest"
+                }
+        }
+        
     }
 }
