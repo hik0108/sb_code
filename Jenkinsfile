@@ -10,6 +10,9 @@ pipeline {
         GITWEBADD = 'https://github.com/hik0108/sb_code.git'
         GITSSHADD = 'git@github.com:hik0108/sb_code.git'
         GITCREDENTIAL = 'git_cre'
+        
+        DOCKERHUB = 'hinkyung/spring'
+        DOCKERCREDENTIAL = 'docker_cre'
     }
     stages {
         stage('checkout Github') {
@@ -37,7 +40,7 @@ pipeline {
         }
         stage('image build') {
             steps {
-                sh "docker vuild -t hinkyung/spring:1.0 ."
+                sh "docker build -t hinkyung/spring:1.0 ."
             }
         }
     }
