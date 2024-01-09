@@ -12,7 +12,7 @@ pipeline {
         GITCREDENTIAL = 'git_cre'
         
         DOCKERHUB = 'hinkyung/spring'
-        DOCKERCREDENTIAL = 'docker_cre'
+        DOCKERHUBCREDENTIAL = 'docker_cre'
     }
     stages {
         stage('checkout Github') {
@@ -41,7 +41,7 @@ pipeline {
         stage('image build') {
             steps {
                 sh "docker build -t ${DOCKERHUB}:${currentBuild.number} ."
-                sh "docker build -t  ${DOCKERHUB}:latest ."
+                sh "docker build -t ${DOCKERHUB}:latest ."
                 // currentBuild.number : 젠킨스 build number
             }
         }
